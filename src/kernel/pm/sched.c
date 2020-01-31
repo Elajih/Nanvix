@@ -99,7 +99,7 @@ PUBLIC void yield(void)
 		 * Process with higher
 		 * waiting time and minimal priority value found.
 		 */
-		if (2* p->counter - p->priority > 2* next->counter - next->priority)
+		if (20*p->nice+ 10*p ->priority - p->counter < 20*next->nice+ 10*next ->priority - next->counter)
 		{
 			next->counter++;
 			next = p;
@@ -122,13 +122,13 @@ PUBLIC void yield(void)
 			continue;
 
 		// we choose the process with the minimal nice value
-		if (2* p->counter - p->priority == 2* next->counter - next->priority && p->nice < next->nice)
+		if (20*p->nice+ 10*p ->priority - p->counter < 20*next->nice+ 10*next ->priority - next->counter && p->nice < next->nice)
 		{
 			next->counter++;
 			next = p;
 		}
 		// if nice value is common then we choose the one with higher counter
-		else if (2* p->counter - p->priority == 2* next->counter - next->priority && next->nice == p->nice)
+		else if (20*p->nice+ 10*p ->priority - p->counter < 20*next->nice+ 10*next ->priority - next->counter && next->nice == p->nice)
 		{
 			if (p->counter > next->counter)
 			{
@@ -139,6 +139,10 @@ PUBLIC void yield(void)
 
 
 	}
+
+		/*
+		 * Process with higher
+		 * waiting time and minimal priority value found.*/
 
 
 
