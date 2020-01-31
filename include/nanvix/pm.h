@@ -207,6 +207,33 @@
 		/**@}*/
 	};
 	
+**
+	 * @name Max size of the ticket table
+	 */
+	/**@{*/
+	#define TAB_SIZE PROC_MAX*8*2*NZERO
+	/**@}*/
+
+	/**
+	 * @name Ticket table, initially empty
+	 */
+	/**@{*/
+		PUBLIC pid_t array_tickets[TAB_SIZE];
+	/**@}*/
+
+	/**
+	 * @name Number of tickets in the ticket table, initially at 0
+	 */
+	/**@{*/
+		PUBLIC int nb_total_tickets;
+	/**@}*/
+
+
+	/* Forward definitions for the tickets. */
+	EXTERN void add_tickets(struct process* p);
+	EXTERN void stop_tickets(struct process* p);
+
+
 	/* Forward definitions. */
 	EXTERN void bury(struct process *);
 	EXTERN void die(int);
