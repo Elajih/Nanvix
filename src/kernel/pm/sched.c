@@ -97,7 +97,7 @@ PUBLIC void yield(void)
 
 		/*
 		 * Process with higher
-		 * waiting time and priority found.
+		 * waiting time and minimal priority value found.
 		 */
 		if (2* p->counter - p->priority > 2* next->counter - next->priority)
 		{
@@ -114,20 +114,20 @@ PUBLIC void yield(void)
 	}
 
 
-	// the process with the highest priority is in "next"
+	//when they are equal ..
 	for (p = FIRST_PROC; p <= LAST_PROC; p++)
 	{
 		/* Skip non-ready process. */
 		if (p->state != PROC_READY)
 			continue;
 
-		// if priority equals then we look at "nice"
+		// we choose the process with the minimal nice value
 		if (2* p->counter - p->priority == 2* next->counter - next->priority && p->nice < next->nice)
 		{
 			next->counter++;
 			next = p;
 		}
-		// else if nice equals then we look at the counter
+		// if nice value is common then we choose the one with higher counter
 		else if (2* p->counter - p->priority == 2* next->counter - next->priority && next->nice == p->nice)
 		{
 			if (p->counter > next->counter)
